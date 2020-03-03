@@ -18,11 +18,8 @@ public class VideoDanmaku : MonoBehaviour
     void Start()
     {
         videoPlayer = GetComponent<VideoPlayer>();
-        for (int i = 0; i < laneParent.childCount; i++)
-        {
-            laneList.Add(laneParent.GetChild(i));
-        }
-        var loveYouForeverRest = new LoveYouForeverRest("http://seto.gicp.net");
+        
+        var loveYouForeverRest = new LoveYouForeverRest("http://localhost:8080");
         loveYouForeverRest.ListDanmakus("welcome", result =>
         {
             if (result.status == "ok")
@@ -34,6 +31,11 @@ public class VideoDanmaku : MonoBehaviour
         {
             Debug.Log($"url: {url}, responseCode: {responseCode}, error: {error}");
         });
+        
+        for (int i = 0; i < laneParent.childCount; i++)
+        {
+            laneList.Add(laneParent.GetChild(i));
+        }
         pauseButton.onClick.AddListener(() =>
         {
             videoPlayer.Pause();
@@ -52,6 +54,7 @@ public class VideoDanmaku : MonoBehaviour
                     danmaku.text = addDanmaku.text;
                     danmaku.time = addDanmaku.time;
                     danmakuList.Insert(0, danmaku);
+                    danmakuInput.text = "";
                 }
             }, null);
         });
