@@ -48,6 +48,15 @@ public class LoveYouForeverRest
         }, onError, body);
     }
 
+    public void ListCountedDanmakus(string scene, Action<ListCountedDanmakusResult> onCompleted, Action<string, long, string> onError)
+    {
+        SendWebRequestText($"{_baseUrl}/loveyouforever/listCountedDanmakus/{scene}", resultText =>
+        {
+            var result = JsonConvert.DeserializeObject<ListCountedDanmakusResult>(resultText);
+            onCompleted?.Invoke(result);
+        }, onError);
+    }
+
     public void ListDanmakus(string scene, Action<ListDanmakusResult> onCompleted, Action<string, long, string> onError)
     {
         SendWebRequestText($"{_baseUrl}/loveyouforever/listDanmakus/{scene}", resultText =>

@@ -31,6 +31,19 @@ public class VideoDanmaku : MonoBehaviour
         {
             Debug.Log($"url: {url}, responseCode: {responseCode}, error: {error}");
         });
+        loveYouForeverRest.ListCountedDanmakus("welcome", result =>
+        {
+            if (result.status == "ok")
+            {
+                foreach (var countedDanmaku in result.list)
+                {
+                    Debug.Log($"text: {countedDanmaku.text}, count: {countedDanmaku.count}");
+                }
+            }
+        }, (url, responseCode, error) =>
+        {
+            Debug.Log($"url: {url}, responseCode: {responseCode}, error: {error}");
+        });
         
         for (int i = 0; i < laneParent.childCount; i++)
         {
